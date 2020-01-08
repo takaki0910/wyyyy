@@ -8,6 +8,11 @@ import filters from './filters'
 import Toast from './components/toast/index'
 Vue.use(Toast);
 
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
 Vue.config.productionTip = false
 
 // 如果是非线上环境，加载 VConsole（移动端适用）
