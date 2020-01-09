@@ -11,7 +11,8 @@ const dev = {
     routerMode: 'history', // hash
 
     /* beta */
-    baseUrl: `${location.origin}`,         // 自定义反向代理
+    baseUrl:'https://autumnfish.cn/',
+    // baseUrl: `${location.origin}`,         // 自定义反向代理
     credential: true,
 };
 
