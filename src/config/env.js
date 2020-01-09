@@ -8,7 +8,7 @@
  */
 
 const dev = {
-    routerMode: 'history', // hash
+    routerMode: 'history', // hasha
 
     /* beta */
     baseUrl:'https://autumnfish.cn/',

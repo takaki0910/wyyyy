@@ -27,9 +27,9 @@
 		},
 		methods: {
 			async doSearch(){
-				const result = await getKeywordMusic('/search',{keywords:this.musicWords})
+				// const result = await getKeywordMusic('/search',{keywords:this.musicWords})
 				const result1 = await getKeywordMusic1(this.musicWords)
-				console.log(result,result1);
+				console.log(result1);
 				
 			}
 		}
