@@ -1,7 +1,5 @@
 <template>
 	<div class="home">
-		<img alt="Vue logo" src="../assets/logo.png" />
-		<i class="iconfont icon-person"></i>
 		<input v-model="musicWords" type="text" @keyup.enter="doSearch"/>
 	</div>
 </template>

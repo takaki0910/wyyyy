@@ -9,7 +9,11 @@
                     <router-view />
                 </Layout>
             </el-main>
-            <el-footer>Footer</el-footer>
+            <el-footer>
+                <div class="footer-wrap">
+                    <img src="./assets/img/common/footer.png" alt="">
+                </div>
+            </el-footer>
         </el-container>
     </div>
 </template>
@@ -39,6 +43,14 @@ export default {
 }
 .el-header {
 	padding: 0;
-	height: 70px;
+}
+.el-footer {
+    background-color: rgb(242, 242, 242);
+    height: 140px !important;
+    border-top: 1px solid gray;
+    .footer-wrap {
+        width: 1100px;
+        margin: 0 auto;
+    }
 }
 </style>
