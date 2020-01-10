@@ -5,12 +5,24 @@
                 <i class="el-icon-moon-night"></i> 很酷的Music
             </div>
             <ul>
-                <li>发现音乐</li>
-                <li>我的音乐</li>
-                <li>朋友</li>
-                <li>商城</li>
-                <li>音乐人</li>
-                <li class="hidden-sm-and-down"><i class="hot"></i> 下载客户端</li>
+                <li><router-link to="/findmusic">发现音乐</router-link></li>
+                <li>
+                    <router-link to="/mymusic">我的音乐</router-link>
+                </li>
+                <li>
+                    <router-link to="/friends">朋友</router-link>
+                </li>
+                <li>
+                    <router-link to="/shop">商城</router-link>
+                </li>
+                <li>
+                    <router-link to="/musicman">音乐人</router-link>
+                </li>
+                <li class="hidden-sm-and-down">
+                    <router-link to="/download">
+                        <i class="hot"></i> 下载客户端
+                    </router-link>
+                </li>
             </ul>
             <Search />
             <p>登录</p>
@@ -21,9 +33,9 @@
 <script>
 //响应式 模块隐藏
 import "element-ui/lib/theme-chalk/display.css";
-import Search from './Search'
+import Search from "./Search";
 export default {
-    components:{
+    components: {
         Search
     }
 };
@@ -59,22 +71,26 @@ export default {
             li {
                 height: 100%;
                 line-height: 60px;
-                font-size: 16px;
-                color: white;
                 padding: 0 15px;
-                cursor: pointer;
-                white-space: nowrap;
+
+                a {
+                    font-size: 16px;
+                    color: white;
+                    text-decoration: none;
+                    cursor: pointer;
+                    white-space: nowrap;
+                }
             }
             li:hover {
                 background-color: #000;
             }
             li:last-child {
                 position: relative;
-                
+
                 .hot {
                     width: 31px;
                     height: 17px;
-                    background-image: url('../assets/img/common/hot.png');
+                    background-image: url("../assets/img/common/hot.png");
                     position: absolute;
                     border-radius: 10px;
                     right: -18px;
