@@ -17,6 +17,7 @@ console.log(process.env);
 const router = new Router({
     // mode: 'history',
     base: base,
+    linkActiveClass:'active',
     routes: [
         {
             path: "/findmusic",

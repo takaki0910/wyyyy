@@ -44,6 +44,9 @@ export default {
 .el-header {
 	padding: 0;
 }
+.el-main {
+    padding: 0;
+}
 .el-footer {
     background-color: rgb(242, 242, 242);
     height: 140px !important;

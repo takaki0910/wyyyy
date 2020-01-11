@@ -1,17 +1,18 @@
 <template>
 	<div class="home">
+		<TopLine></TopLine>
 		<input v-model="musicWords" type="text" @keyup.enter="doSearch"/>
 	</div>
 </template>
 
 <script>
-	import HelloWorld from "@/components/HelloWorld";
+	import TopLine from "@/components/TopLine";
 	import {getKeywordMusic,getKeywordMusic1} from  '../api/common.js'
 
 	export default {
 		name: "home",
 		components: {
-			HelloWorld
+			TopLine
 		},
 		data() {
 			return {
@@ -38,10 +39,5 @@
 	@import "~@/assets/iconfont/iconfont.css";
 
 	.home {
-		display: flex;
-		flex-flow: column;
-		align-items: center;
-		text-align: center;
-		line-height: 1.2;
 	}
 </style>
