@@ -8,6 +8,12 @@ const Friends = () => import(/* webpackChunkName: "" */ "../views/Friends");
 const Shop = () => import(/* webpackChunkName: "" */ "../views/Shop");
 const MusicMan = () => import(/* webpackChunkName: "" */ "../views/MusicMan");
 const Download = () => import(/* webpackChunkName: "" */ "../views/Download");
+const IndexPage = () => import(/* webpackChunkName: "" */ "../views/discover");
+const Toplist = () => import(/* webpackChunkName: "" */ "../views/discover/toplist");
+const Playlist = () => import(/* webpackChunkName: "" */ "../views/discover/playlist");
+const Djradio = () => import(/* webpackChunkName: "" */ "../views/discover/djradio");
+const Artist = () => import(/* webpackChunkName: "" */ "../views/discover/artist");
+const Album = () => import(/* webpackChunkName: "" */ "../views/discover/album");
 
 Vue.use(Router);
 
@@ -22,7 +28,39 @@ const router = new Router({
         {
             path: "/findmusic",
             name: "findmusic",
-            component: FindMusic
+            component: FindMusic,
+            children:[
+                {
+                    path:'/findmusic',
+                    name:'findmusicIndex',
+                    component: IndexPage
+                },
+                {
+                    path:'/findmusic/toplist',
+                    name:'toplist',
+                    component: Toplist
+                },
+                {
+                    path:'/findmusic/playlist',
+                    name:'playlist',
+                    component: Playlist
+                },
+                {
+                    path:'/findmusic/djradio',
+                    name:'djradio',
+                    component: Djradio
+                },
+                {
+                    path:'/findmusic/artist',
+                    name:'artist',
+                    component: Artist
+                },
+                {
+                    path:'/findmusic/album',
+                    name:'album',
+                    component: Album
+                }
+            ]
         },
         {
             path: "/mymusic",
