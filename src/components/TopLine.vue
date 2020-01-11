@@ -26,7 +26,7 @@ export default {
         }
     },
     mounted(){
-        console.log(this.navs)
+        // console.log(this.navs)
     },
     methods: {
         clickHandler(index,url) {

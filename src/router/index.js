@@ -1,6 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+//重复点击路由的报错
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 // 按需（懒）加载（vue实现）
 const FindMusic = () => import(/* webpackChunkName: "" */ "../views/FindMusic");
 const MyMusic = () => import(/* webpackChunkName: "" */ "../views/MyMusic");
