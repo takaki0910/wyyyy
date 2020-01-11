@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { log } from 'util';
 export default {
     // props:['msg'],
     props:{

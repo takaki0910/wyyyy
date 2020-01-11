@@ -21,6 +21,9 @@ const Djradio = () => import(/* webpackChunkName: "" */ "../views/discover/djrad
 const Artist = () => import(/* webpackChunkName: "" */ "../views/discover/artist");
 const Album = () => import(/* webpackChunkName: "" */ "../views/discover/album");
 
+const NotFound = () => import(/* webpackChunkName: "" */ "../views/NotFound");
+
+
 Vue.use(Router);
 
 let base = `${process.env.BASE_URL}`; // 动态获取二级目录
@@ -96,6 +99,11 @@ const router = new Router({
         {
             path: "/",
             redirect: "/findmusic"
+        },
+        {
+            path:"*",
+            name:"notfound",
+            component:NotFound
         }
     ],
     scrollBehavior(to, from, savedPosition) {
