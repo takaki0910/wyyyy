@@ -2,7 +2,7 @@
     <div class="header-wrap">
         <div class="header">
             <div class="logo">
-                <i class="el-icon-moon-night"></i> 很酷的Music
+                <i class="el-icon-moon-night" style="color:rgb(230, 0, 38)"></i> 很酷的Music
             </div>
             <ul>
                 <li v-for="(item,index) in headList" :key="index" @click="clickHandler(index)">

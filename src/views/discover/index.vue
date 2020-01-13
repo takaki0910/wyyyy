@@ -20,7 +20,10 @@
                     </el-carousel-item>
                 </el-carousel>
                 <!-- 客户端下载 -->
-                <div class="download"><a class="download-btn" href="javascript:;"></a></div>
+                <div class="download">
+                    <a class="download-btn" href="javascript:;"></a>
+                    <p>PC 安卓 iPhone WP iPad Mac 六大客户端</p>
+                </div>
             </div>
         </div>
     </div>
@@ -56,7 +59,7 @@ export default {
         },
         doBannerChange(index) {
             // console.log(index);
-            this.bg_url = this.bannerList[index].bg_image
+            this.bg_url = this.bannerList[index].bg_image;
         }
     },
     watch: {}
@@ -109,12 +112,23 @@ export default {
                     display: block;
                     width: 215px;
                     height: 56px;
-                    background: url("../../assets/img/download.png") no-repeat 0 60px;
+                    background: url("../../assets/img/download.png") no-repeat 0
+                        60px;
                     left: 18px;
                     bottom: 45px;
                 }
                 .download-btn:hover {
                     background-position: 1px -289px;
+                }
+
+                p {
+                    position: absolute;
+                    white-space: nowrap;
+                    bottom: 18px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 12px;
+                    color: rgb(141, 141, 141)
                 }
             }
         }
