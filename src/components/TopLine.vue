@@ -43,7 +43,7 @@ export default {
 
     .line-container {
         width: 1100px;
-        padding: 5px 0 5px 246px;
+        padding: 5px 0 5px 236px;
         margin: 0 auto;
         display: flex;
         align-items: center;

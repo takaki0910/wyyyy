@@ -91,10 +91,11 @@ export default {
         align-items: center;
 
         .logo {
-            font-size: 28px;
+            font-size: 26px;
             color: white;
             line-height: 60px;
             margin-right: 25px;
+            white-space: nowrap;
         }
         ul {
             height: 100%;

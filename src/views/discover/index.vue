@@ -26,13 +26,23 @@
                 </div>
             </div>
         </div>
+        <div class="content">
+            <div class="content-left">
+                <NavsHeader show="true"><span class="words">热门推荐</span></NavsHeader>
+            </div>
+            <div class="content-right"></div>
+        </div>
     </div>
 </template>
 
 <script>
 import { getBannerData } from "../../api/common";
+import NavsHeader from "../../components/NavsHeader";
 
 export default {
+    components: {
+        NavsHeader
+    },
     data() {
         return {
             bannerList: [],
@@ -45,6 +55,7 @@ export default {
     },
     methods: {
         getBannerList() {
+            return false;
             getBannerData().then(res => {
                 console.log(res);
                 const newData = res.banners;
@@ -104,6 +115,7 @@ export default {
             .download {
                 width: 254px;
                 height: 286px;
+                border-bottom: 2px solid rgb(16, 8, 8);
                 position: relative;
                 background: url("../../assets/img/download.png") no-repeat 0 0;
 
@@ -128,9 +140,28 @@ export default {
                     left: 50%;
                     transform: translateX(-50%);
                     font-size: 12px;
-                    color: rgb(141, 141, 141)
+                    color: rgb(141, 141, 141);
                 }
             }
+        }
+    }
+
+    .content {
+        width: 1100px;
+        margin: 0 auto;
+        border: 1px solid rgb(211, 211, 211);
+        height: 666px;
+        display: flex;
+
+        .content-left {
+            width: 846px;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .content-right {
+            height: 100%;
+            border-left: 1px solid rgb(211, 211, 211);
         }
     }
 }
