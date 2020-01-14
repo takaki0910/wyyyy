@@ -32,6 +32,7 @@ $red:rgb(193, 13, 12);
     padding-bottom: 2px;
     height: 50px;
     border-bottom: 2px solid $red;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
 

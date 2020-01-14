@@ -28,7 +28,25 @@
         </div>
         <div class="content">
             <div class="content-left">
-                <NavsHeader show="true"><span class="words">热门推荐</span></NavsHeader>
+                <NavsHeader show="true"
+                    ><span class="words">热门推荐</span></NavsHeader
+                >
+                <div class="recommend-wrap">
+                    <div class="pic">
+                        <img
+                            src="https://p2.music.126.net/js2KR2eVHz-RONCLpBLL3Q==/109951164622725596.jpg"
+                            alt=""
+                        />
+                        <span>
+                            <i class="icon"></i>
+                            <p>66万</p>
+                            <a href="javascript:;" title="播放"></a>
+                        </span>
+                    </div>
+                    <a href="javascript:;" class="recommend-title"
+                        >[华语速爆新歌] 最新华语音乐推荐</a
+                    >
+                </div>
             </div>
             <div class="content-right"></div>
         </div>
@@ -130,7 +148,7 @@ export default {
                     bottom: 45px;
                 }
                 .download-btn:hover {
-                    background-position: 1px -289px;
+                    background-position: 1px -287px;
                 }
 
                 p {
@@ -157,6 +175,63 @@ export default {
             width: 846px;
             height: 100%;
             padding: 0 20px;
+
+            .recommend-wrap {
+                width: 140px;
+
+                .pic {
+                    width: 140px;
+                    height: 140px;
+                    margin-bottom: 10px;
+                    position: relative;
+                    img {
+                        width: 140px;
+                        height: 140px;
+                    }
+
+                    span {
+                        height: 27px;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        background: url("../../assets/img/coverall.png") 0 -537px;
+                        display: flex;
+                        align-items: center;
+
+                        .icon {
+                            width: 14px;
+                            height: 11px;
+                            margin: 9px 8px;
+                            background: url("../../assets/img/iconall.png")
+                                no-repeat 0 -24px;
+                        }
+
+                        p {
+                            font-size: 12px;
+                            color: #ccc;
+                        }
+
+                        a {
+                            width: 16px;
+                            height: 17px;
+                            margin-left: auto;
+                            margin-right: 8px;
+                            background: url("../../assets/img/iconall.png")
+                                no-repeat 0 0;
+                        }
+                    }
+                }
+
+                .recommend-title {
+                    color: #000;
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+                .recommend-title:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
         .content-right {
