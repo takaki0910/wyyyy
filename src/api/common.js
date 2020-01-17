@@ -15,3 +15,5 @@ export const rankGender = data => Request.get('/ranking/gender', data);
 export const getKeywordMusic1 = (data) => Request.get(`${urls.MUSIC_SEARCH}${data}`)
 
 export const getBannerData = ()=> Request.get(`${urls.MUSIC_BANNER}`)
+export const getRecommentData = ()=>Request.get(`${urls.PERSONALIZED}`)
+export const getNewAlbumData = ()=>Request.get(`${urls.NEWALBUM}`)

@@ -31,22 +31,73 @@
                 <NavsHeader show="true"
                     ><span class="words">热门推荐</span></NavsHeader
                 >
-                <div class="recommend-wrap">
-                    <div class="pic">
-                        <img
-                            src="https://p2.music.126.net/js2KR2eVHz-RONCLpBLL3Q==/109951164622725596.jpg"
-                            alt=""
-                        />
-                        <span>
-                            <i class="icon"></i>
-                            <p>66万</p>
-                            <a href="javascript:;" title="播放"></a>
-                        </span>
-                    </div>
-                    <a href="javascript:;" class="recommend-title"
-                        >[华语速爆新歌] 最新华语音乐推荐</a
+                <div class="recomment-container">
+                    <div
+                        class="recommend-wrap"
+                        v-for="item in recommentDataList"
+                        :key="item.id"
                     >
+                        <div class="pic">
+                            <img :src="item.picUrl" alt="" />
+                            <span>
+                                <i class="icon"></i>
+                                <p>{{ item.playCount | formateCount }}万</p>
+                                <a href="javascript:;" title="播放"></a>
+                            </span>
+                        </div>
+                        <a href="javascript:;" class="recommend-title">{{
+                            item.name
+                        }}</a>
+                    </div>
                 </div>
+                <NavsHeader show="false"
+                    ><span class="words">新碟上架</span></NavsHeader
+                >
+                <div class="ablum-container">
+                    <el-carousel
+                        ref="sliderDom"
+                        arrow="never"
+                        :autoplay="false"
+                        trigger="click"
+                        indicator-position="none"
+                    >
+                        <el-carousel-item
+                            v-for="(item, index) in albumList"
+                            :key="index"
+                        >
+                            <!-- 编辑 -->
+                            <ul class="items-wrap">
+                                <li
+                                    class="items"
+                                    v-for="(subItem, subIndex) in item"
+                                    :key="subIndex"
+                                >
+                                    <div class="pic-container">
+                                        <img
+                                            class="img"
+                                            :src="
+                                                subItem.picUrl +
+                                                    '?param=100y100'
+                                            "
+                                            alt=""
+                                        />
+                                        <a href="javascript:;"></a>
+                                    </div>
+                                    <p>{{ subItem.name }}</p>
+                                    <span>{{ subItem.artists[0].name }}</span>
+                                </li>
+                            </ul>
+                        </el-carousel-item>
+                    </el-carousel>
+                    <i class="el-icon-caret-left" @click="doSlider('left')"></i>
+                    <i
+                        class="el-icon-caret-right"
+                        @click="doSlider('right')"
+                    ></i>
+                </div>
+                <NavsHeader show="false"
+                    ><span class="words">榜单</span></NavsHeader
+                >
             </div>
             <div class="content-right"></div>
         </div>
@@ -54,26 +105,42 @@
 </template>
 
 <script>
-import { getBannerData } from "../../api/common";
+import {
+    getBannerData,
+    getRecommentData,
+    getNewAlbumData
+} from "../../api/common";
 import NavsHeader from "../../components/NavsHeader";
 
 export default {
     components: {
         NavsHeader
     },
+    filters: {
+        formateCount(val) {
+            return Math.ceil(val / 10000);
+        }
+    },
     data() {
         return {
+            //轮播图
             bannerList: [],
             // 动态绑定背景图片
-            bg_url: ""
+            bg_url: "",
+            //推荐歌单
+            recommentDataList: [],
+            //新碟数据
+            albumList: []
         };
     },
     mounted() {
         this.getBannerList();
+        this.getRecommentDataList();
+        this.getAlbumList();
     },
     methods: {
         getBannerList() {
-            return false;
+            // return false;
             getBannerData().then(res => {
                 console.log(res);
                 const newData = res.banners;
@@ -86,9 +153,39 @@ export default {
                 this.bg_url = this.bannerList[0].bg_image;
             });
         },
+        getRecommentDataList() {
+            // return false;
+            getRecommentData().then(res => {
+                console.log(res);
+                this.recommentDataList = res.result.slice(0, 10);
+            });
+        },
         doBannerChange(index) {
             // console.log(index);
             this.bg_url = this.bannerList[index].bg_image;
+        },
+        doSlider(direction) {
+            direction === "left"
+                ? this.$refs.sliderDom.prev()
+                : this.$refs.sliderDom.next();
+        },
+        getAlbumList() {
+            // return false;
+            getNewAlbumData().then(res => {
+                let cacheData = [];
+                cacheData.push(
+                    res.albums.filter((item, index) => {
+                        return index <= 4;
+                    })
+                );
+                cacheData.push(
+                    res.albums.filter((item, index) => {
+                        return index > 4;
+                    })
+                );
+                console.log("new", cacheData);
+                this.albumList = cacheData;
+            });
         }
     },
     watch: {}
@@ -168,7 +265,8 @@ export default {
         width: 1100px;
         margin: 0 auto;
         border: 1px solid rgb(211, 211, 211);
-        height: 666px;
+        background-color: #fff;
+        height: 1666px;
         display: flex;
 
         .content-left {
@@ -176,60 +274,160 @@ export default {
             height: 100%;
             padding: 0 20px;
 
-            .recommend-wrap {
-                width: 140px;
+            .recomment-container {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
-                .pic {
+                .recommend-wrap {
                     width: 140px;
-                    height: 140px;
-                    margin-bottom: 10px;
-                    position: relative;
-                    img {
+                    margin-bottom: 20px;
+
+                    .pic {
                         width: 140px;
                         height: 140px;
+                        margin-bottom: 10px;
+                        position: relative;
+                        img {
+                            width: 140px;
+                            height: 140px;
+                        }
+
+                        span {
+                            height: 27px;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            background: url("../../assets/img/coverall.png") 0 -537px;
+                            display: flex;
+                            align-items: center;
+
+                            .icon {
+                                width: 14px;
+                                height: 11px;
+                                margin: 9px 8px;
+                                background: url("../../assets/img/iconall.png")
+                                    no-repeat 0 -24px;
+                            }
+
+                            p {
+                                font-size: 12px;
+                                color: #ccc;
+                            }
+
+                            a {
+                                width: 16px;
+                                height: 17px;
+                                margin-left: auto;
+                                margin-right: 8px;
+                                background: url("../../assets/img/iconall.png")
+                                    no-repeat 0 0;
+                            }
+                        }
                     }
 
-                    span {
-                        height: 27px;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        background: url("../../assets/img/coverall.png") 0 -537px;
-                        display: flex;
-                        align-items: center;
+                    .recommend-title {
+                        color: #000;
+                        font-size: 14px;
+                        text-decoration: none;
+                    }
+                    .recommend-title:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
 
-                        .icon {
-                            width: 14px;
-                            height: 11px;
-                            margin: 9px 8px;
-                            background: url("../../assets/img/iconall.png")
-                                no-repeat 0 -24px;
-                        }
+            .ablum-container {
+                width: 100%;
+                height: 188px;
+                padding: 10px 35px;
+                background-color: rgb(245, 245, 245);
+                border: 1px solid rgb(211, 211, 211);
+                position: relative;
 
-                        p {
-                            font-size: 12px;
-                            color: #ccc;
-                        }
+                /deep/ .el-carousel {
+                    height: 168px;
 
-                        a {
-                            width: 16px;
-                            height: 17px;
-                            margin-left: auto;
-                            margin-right: 8px;
-                            background: url("../../assets/img/iconall.png")
-                                no-repeat 0 0;
+                    .el-carousel__container {
+                        height: 168px;
+
+                        .el-carousel__item {
+                            height: 168px;
+
+                            .items-wrap {
+                                height: 100%;
+                                padding-top: 23px;
+                                display: flex;
+                                justify-content: space-around;
+
+                                .items {
+                                    height: 150px;
+                                    width: 118px;
+                                    background: url("../../assets/img/index.png")
+                                        no-repeat -260px 100px;
+
+                                    .pic-container {
+                                        widows: 100%;
+                                        height: 100px;
+                                        margin-bottom: 8px;
+                                        position: relative;
+                                        z-index: 0;
+
+                                        .img {
+                                            width: 100px;
+                                            height: 100px;
+                                        }
+                                        a {
+                                            width: 100%;
+                                            height: 100%;
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            background: url("../../assets/img/coverall.png")
+                                                no-repeat 0 -570px;
+                                        }
+                                    }
+
+                                    p {
+                                        font-size: 12px;
+                                        margin-bottom: 3px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                    span {
+                                        font-size: 12px;
+                                        color: rgb(102, 102, 102);
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        // a标签的title属性 可以悬停显示,这里需要更换为a标签
+                                    }
+                                }
+                            }
                         }
                     }
                 }
 
-                .recommend-title {
-                    color: #000;
-                    font-size: 14px;
-                    text-decoration: none;
+                .el-icon-caret-left {
+                    position: absolute;
+                    cursor: pointer;
+                    padding: 4px;
+                    font-size: 18px;
+                    left: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
                 }
-                .recommend-title:hover {
-                    text-decoration: underline;
+                .el-icon-caret-right {
+                    position: absolute;
+                    cursor: pointer;
+                    padding: 4px;
+                    font-size: 18px;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
                 }
             }
         }
