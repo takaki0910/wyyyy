@@ -98,6 +98,17 @@
                 <NavsHeader show="false"
                     ><span class="words">榜单</span></NavsHeader
                 >
+                <div class="toplist-container">
+                    <RankList class="rank-wrap">
+                        <a href="javascript:;">云音乐飙升榜</a>
+                    </RankList>
+                    <RankList class="rank-wrap">
+                        <a href="javascript:;">云音乐新歌榜</a>
+                    </RankList>
+                    <RankList class="rank-wrap">
+                        <a href="javascript:;">网易原创歌曲榜</a>
+                    </RankList>
+                </div>
             </div>
             <div class="content-right"></div>
         </div>
@@ -111,10 +122,12 @@ import {
     getNewAlbumData
 } from "../../api/common";
 import NavsHeader from "../../components/NavsHeader";
+import RankList from "../../components/RankList"
 
 export default {
     components: {
-        NavsHeader
+        NavsHeader,
+        RankList
     },
     filters: {
         formateCount(val) {
@@ -428,6 +441,22 @@ export default {
                     right: 10px;
                     top: 50%;
                     transform: translateY(-50%);
+                }
+            }
+
+            .toplist-container {
+                height: 470px;
+                background-color: rgb(245, 245, 245);
+                border: 1px solid rgb(211, 211, 211);
+                display: flex;
+
+                .rank-wrap {
+                    flex: 1;
+                    border-right: 1px solid rgb(211, 211, 211);
+                }
+
+                .rank-wrap:last-child {
+                    border-right: 0;
                 }
             }
         }
